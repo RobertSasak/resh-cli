@@ -3,7 +3,6 @@
 'use strict';
 var _ = require('lodash');
 var multiline = require('multiline');
-var nopt = require('nopt');
 var updateNotifier = require('update-notifier');
 var stdin = require('get-stdin');
 var sudoBlock = require('sudo-block');
@@ -11,12 +10,12 @@ var notifier = updateNotifier();
 var path = require('path');
 var oblacik = require('./oblacik.js');
 var fs = require('fs');
-
-var args = _.rest(process.argv, 2);
-var options = {};
+var Configstore = require('configstore');
+var packageName = require('./package').name;
 
 function parseArgs(args) {
-	var i = 0;
+	var options = {},
+		i = 0;
 	while (i < args.length) {
 		var arg = args[i];
 		switch (arg) {
@@ -42,15 +41,19 @@ function parseArgs(args) {
 			if (arg[0] === '-') {
 				console.log('Invalid option: ' + arg);
 			} else {
-				return args.splice(i);
+				return {
+					options: options,
+					command: args.splice(i)
+				};
 			}
 		}
 		i++;
 	}
-	return [];
+	return {
+		options: options,
+		command: []
+	};
 }
-
-args = parseArgs(args);
 
 function showHelp() {
 	console.log(multiline.stripIndent(function () {
@@ -74,6 +77,8 @@ function showHelp() {
 		  -k, --key <userKey>    Authentification key.
 		  -d, --debug            Output what happens under hood.
 		  -v, --version
+
+		Once the key is provided the key is cached and can be omit in next commands.	
 	*/
 	}));
 }
@@ -103,6 +108,8 @@ function sendCommand(userKey, server, args) {
 }
 
 function init(args, options) {
+	var conf = new Configstore(packageName);
+
 	if (options.version && args.length === 0) {
 		return console.log(require('./package.json').version);
 	}
@@ -111,27 +118,38 @@ function init(args, options) {
 		return showHelp();
 	}
 
-	var userKey = options.key;
-	if (!userKey) {
+	options.key = options.key || conf.get('key');
+	if (!options.key) {
 		return console.log('Missing key. Try command $ oblacik -k 123...xyz echo Hello World');
 	}
 
-	options.server = options.server || 'http://54.72.207.64';
+	options.server = options.server || conf.get('server') || 'http://54.72.207.64';
 
-	sendCommand(userKey, options.server, args);
+	conf.set('key', options.key);
+	conf.set('server', options.server);
+
+	sendCommand(options.key, options.server, args);
 }
 
-if (notifier.update) {
-	notifier.notify(true);
+function main() {
+	var args = _.rest(process.argv, 2);
+	var options = {};
+	var parsed = parseArgs(args);
+
+	if (notifier.update) {
+		notifier.notify(true);
+	}
+
+	sudoBlock();
+
+	if (process.stdin.isTTY) {
+		init(parsed.command, parsed.options);
+	} else {
+		stdin(function (data) {
+			[].push.apply(args, data.trim().split('\n'));
+			init(args, options);
+		});
+	}
 }
 
-sudoBlock();
-
-if (process.stdin.isTTY) {
-	init(args, options);
-} else {
-	stdin(function (data) {
-		[].push.apply(args, data.trim().split('\n'));
-		init(args, options);
-	});
-}
+main();
