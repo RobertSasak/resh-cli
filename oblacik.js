@@ -5,20 +5,22 @@ var fs = require('fs');
 
 
 function shell(userKey, server, command, files) {
-	var data = {};
+	var options = {},
+		data = {},
+		hasFiles = false;
 
-	if (files) {
-		for (var f in files) {
-			var file = files[f];
+	for (var f in files) {
+		var file = files[f];
 
-			data[file] = rest.file(file.path, null, fs.statSync(file.path).size);
-		}
+		data[file] = rest.file(file.path, null, fs.statSync(file.path).size);
+		hasFiles = true;
+	}
+	if (hasFiles) {
+		options.multipart = true;
+		options.data = data;
 	}
 
-	rest.post(server + '/' + encodeURIComponent(userKey) + '/' + encodeURIComponent(command), {
-		multipart: !!files,
-		data: data
-	}).on('complete', function (data) {
+	rest.post(server + '/' + encodeURIComponent(userKey) + '/' + encodeURIComponent(command), options).on('complete', function (data) {
 		console.log(data);
 	});
 }

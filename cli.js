@@ -12,21 +12,45 @@ var path = require('path');
 var oblacik = require('./oblacik.js');
 var fs = require('fs');
 
-var options = nopt({
-	help: Boolean,
-	version: Boolean,
-	key: String,
-	server: String,
-	debug: Boolean
-}, {
-	h: '--help',
-	v: '--version',
-	k: '--key',
-	s: '--server',
-	d: '--debug'
-});
+var args = _.rest(process.argv, 2);
+var options = {};
 
-var args = options.argv.remain;
+function parseArgs(args) {
+	var i = 0;
+	while (i < args.length) {
+		var arg = args[i];
+		switch (arg) {
+		case '-v':
+		case '--version':
+			options.version = true;
+			break;
+		case '-h':
+		case '--help':
+			options.help = true;
+			break;
+		case '-s':
+		case '--server':
+			options.server = args[i + 1];
+			i++;
+			break;
+		case '-k':
+		case '--key':
+			options.key = args[i + 1];
+			i++;
+			break;
+		default:
+			if (arg[0] === '-') {
+				console.log('Invalid option: ' + arg);
+			} else {
+				return args.splice(i);
+			}
+		}
+		i++;
+	}
+	return [];
+}
+
+args = parseArgs(args);
 
 function showHelp() {
 	console.log(multiline.stripIndent(function () {
@@ -58,19 +82,19 @@ function detectFiles(args) {
 	var files = [];
 	_.forEach(args, function (file) {
 		var absolutePath = path.resolve(file);
-		if (fs.existsSync(file)) {
-			console.log(file, absolutePath);
-
-			files[path.basename(file)] = {
-				path: absolutePath
-			};
-		}
+		try {
+			var stat = fs.lstatSync(absolutePath);
+			if (stat.isFile()) {
+				files[path.basename(file)] = {
+					path: absolutePath
+				};
+			}
+		} catch (e) {}
 	});
 	return files;
 }
 
 function sendCommand(userKey, server, args) {
-	console.log(args);
 	var command = args.join(' ');
 
 	var files = detectFiles(args);
@@ -79,11 +103,11 @@ function sendCommand(userKey, server, args) {
 }
 
 function init(args, options) {
-	if (options.version) {
+	if (options.version && args.length === 0) {
 		return console.log(require('./package.json').version);
 	}
 
-	if (options.help || args.length === 0) {
+	if ((options.help && args.length === 0) || args.length === 0) {
 		return showHelp();
 	}
 
