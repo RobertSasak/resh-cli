@@ -90,9 +90,12 @@ function detectFiles(args) {
 		try {
 			var stat = fs.lstatSync(absolutePath);
 			if (stat.isFile()) {
-				files[path.basename(file)] = {
-					path: absolutePath
-				};
+				var relativePath = path.relative(__dirname, absolutePath);
+				if (relativePath.indexOf('..') !== 0) {
+					files[relativePath] = {
+						path: absolutePath
+					};
+				}
 			}
 		} catch (e) {}
 	});

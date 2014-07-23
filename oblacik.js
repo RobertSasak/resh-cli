@@ -11,8 +11,7 @@ function shell(userKey, server, command, files) {
 
 	for (var f in files) {
 		var file = files[f];
-
-		data[file] = rest.file(file.path, null, fs.statSync(file.path).size);
+		data[f] = rest.file(file.path, null, fs.statSync(file.path).size);
 		hasFiles = true;
 	}
 	if (hasFiles) {
