@@ -29,8 +29,9 @@
     "get-stdin": "~0.1.0",
     "subarg": "0.0.1",
     "sudo-block": "~0.4.0",
-    "restler": "~3.2.2",
-    "configstore": "~0.3.1"
+    "configstore": "~0.3.1",
+    "q": "~1.0.1",
+    "form-data": "~0.1.4"
   },
   "devDependencies": {}
 }

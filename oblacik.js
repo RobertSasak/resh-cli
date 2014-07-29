@@ -1,26 +1,22 @@
 'use strict';
 
-var rest = require('restler');
 var fs = require('fs');
-
+var FormData = require('form-data');
 
 function shell(userKey, server, command, files) {
-	var options = {},
-		data = {},
-		hasFiles = false;
+	var form = new FormData();
 
 	for (var f in files) {
 		var file = files[f];
-		data[f] = rest.file(file.path, null, fs.statSync(file.path).size);
-		hasFiles = true;
-	}
-	if (hasFiles) {
-		options.multipart = true;
-		options.data = data;
+		form.append(f, fs.createReadStream(file.path));
 	}
 
-	rest.post(server + '/' + encodeURIComponent(userKey) + '/' + encodeURIComponent(command), options).on('complete', function (data) {
-		console.log(data);
+	form.submit(server + '/' + encodeURIComponent(userKey) + '/' + encodeURIComponent(command), function (err, res) {
+		if (err) {
+			throw err;
+		} else {
+			res.pipe(process.stdout);
+		}
 	});
 }
 
