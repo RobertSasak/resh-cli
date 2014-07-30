@@ -12,6 +12,7 @@ var oblacik = require('./oblacik.js');
 var fs = require('fs');
 var Configstore = require('configstore');
 var packageName = require('./package').name;
+var slash = require('slash');
 
 function parseArgs(args) {
 	var options = {},
@@ -91,6 +92,9 @@ function detectFiles(args) {
 			var stat = fs.lstatSync(absolutePath);
 			if (stat.isFile()) {
 				var relativePath = path.relative(__dirname, absolutePath);
+				if (process.platform === 'win32') {
+					relativePath = slash(relativePath);
+				}
 				if (relativePath.indexOf('..') !== 0) {
 					files[relativePath] = {
 						path: absolutePath
