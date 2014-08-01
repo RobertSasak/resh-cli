@@ -33,7 +33,8 @@
     "slash": "^0.1.3",
     "subarg": "0.0.1",
     "sudo-block": "~0.4.0",
-    "update-notifier": "~0.1.10"
+    "update-notifier": "~0.1.10",
+    "url-join": "0.0.1"
   },
   "devDependencies": {}
 }
