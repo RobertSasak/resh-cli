@@ -1,7 +1,7 @@
 {
   "name": "oblacik-cli",
   "version": "0.0.1",
-  "description": "Command line interface above RESTfull API",
+  "description": "Shell in the cloud.",
   "license": "MIT",
   "repository": "robert.sasak/oblacik-cli",
   "bin": {
@@ -16,7 +16,8 @@
     "node": ">=0.10.0"
   },
   "files": [
-    "cli.js"
+    "cli.js",
+    "oblacik.js"
   ],
   "keywords": [
     "cli",
