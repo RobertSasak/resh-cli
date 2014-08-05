@@ -8,7 +8,7 @@ var stdin = require('get-stdin');
 var sudoBlock = require('sudo-block');
 var notifier = updateNotifier();
 var path = require('path');
-var oblacik = require('./oblacik.js');
+var Oblacik = require('./oblacik.js');
 var fs = require('fs');
 var Configstore = require('configstore');
 var packageName = require('./package').name;
@@ -111,7 +111,16 @@ function sendCommand(userKey, server, args) {
 
 	var files = detectFiles(args);
 
-	oblacik.shell(userKey, server, command, files);
+	var commands = new Oblacik.Commands(server);
+	commands.create(command, files, function () {
+		commands.files(function (files) {
+			_.forEach(files, function (f) {
+				commands.downloadFile(f.path, f.path, function () {
+
+				});
+			});
+		});
+	});
 }
 
 function init(args, options) {
