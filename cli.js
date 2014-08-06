@@ -112,14 +112,18 @@ function sendCommand(userKey, server, args) {
 	var files = detectFiles(args);
 
 	var commands = new Oblacik.Commands(server);
-	commands.create(command, files, function () {
+	commands.create(command, files, {}, process.stdout, function () {
+
 		commands.files(function (files) {
 			_.forEach(files, function (f) {
-				commands.downloadFile(f.path, f.path, function () {
 
+				commands.downloadFile(f.path, f.path, function () {
+					//TODO: download manager
 				});
+
 			});
 		});
+
 	});
 }
 

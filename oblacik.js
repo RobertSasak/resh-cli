@@ -12,6 +12,7 @@ var Commands = function (server, id) {
 };
 
 Commands.prototype.create = function (command, files, options, stream, callback) {
+	var THIS = this;
 	var form = new formData();
 
 	for (var f in files) {
@@ -21,43 +22,42 @@ Commands.prototype.create = function (command, files, options, stream, callback)
 
 	form.append('command', command);
 
-	form.submit({
-		port: 3000,
-		host: 'localhost',
-		path: '/commands/create'
-	}, function (error, res) {
+	form.submit(urljoin(this.server, '/commands/create'), function (error, res) {
 		if (error) {
 			throw error;
 		}
 
-		res.pipe(process.stdout);
+		res.pipe(stream);
+		THIS.id = res.headers['x-id'];
 
-		this.id = res.headers['x-id'];
-
-		if (callback) {
-			callback({
-				id: this.id
-			});
-		}
+		res.on('end', function () {
+			if (callback) {
+				callback({
+					id: THIS.id
+				});
+			}
+		});
 	});
 };
 
 Commands.prototype.files = function (callback) {
-	http.request({
-		host: this.server,
-		path: urljoin('commands', this.id, 'files')
-	}, function (res) {
-		var body = '';
-		res.on('data', function (chunk) {
-			body += chunk;
-		}).on('end', function () {
-			if (callback) {
-				callback(JSON.parse(body));
-			}
+	var url = urljoin(this.server, 'commands', this.id, 'files');
+	http
+		.get(url, function (res) {
+			var body = '';
+			res
+				.on('data', function (chunk) {
+					body += chunk;
+				})
+				.on('end', function () {
+					if (callback) {
+						callback(JSON.parse(body));
+					}
+				});
+		})
+		.on('error', function (error) {
+			throw error;
 		});
-	}).on('error', function (error) {
-		throw error;
-	});
 };
 
 Commands.prototype.downloadFile = function (path, dest, callback) {
