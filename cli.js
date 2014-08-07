@@ -86,6 +86,11 @@ function showHelp() {
 
 function detectFiles(args) {
 	var files = [];
+
+	args = _.chain(args).map(function (a) {
+		return a.split(/[\||;|,|>|<|&|=]+/);
+	}).flatten().value();
+
 	_.forEach(args, function (file) {
 		var absolutePath = path.resolve(file);
 		try {
@@ -136,6 +141,10 @@ function init(args, options) {
 
 	if ((options.help && args.length === 0) || args.length === 0) {
 		return showHelp();
+	}
+
+	if (args.length === 1) {
+		args = args[0].split(' ');
 	}
 
 	options.key = options.key || conf.get('key');
