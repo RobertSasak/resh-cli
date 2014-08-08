@@ -147,12 +147,12 @@ function init(args, options) {
 		args = args[0].split(' ');
 	}
 
-	options.key = options.key || conf.get('key');
-	if (!options.key) {
-		return console.log('Missing key. Try command $ oblacik -k 123...xyz echo Hello World');
-	}
+	// options.key = options.key || conf.get('key');
+	// if (!options.key) {
+	// 	return console.log('Missing key. Try command $ oblacik -k 123...xyz echo Hello World');
+	// }
 
-	options.server = options.server || conf.get('server') || 'http://54.72.207.64';
+	options.server = options.server || conf.get('server') || 'http://oblacik.sasak.sk';
 
 	conf.set('key', options.key);
 	conf.set('server', options.server);
