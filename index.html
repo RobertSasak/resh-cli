@@ -1,10 +1,179 @@
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TODO">
     <title>Remote Shell</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <script>
+    </script>
 </head>
 <body>
-    Stay tuned;
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
+            <a class="pure-menu-heading" href="/">Remote Shell</a>
+
+            <ul>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="http://api.resh.io">Api</a></li>
+                <li><a href="#signup">Sign Up</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="splash-container">
+        <div class="splash">
+            <h1 class="splash-head">Shell made easy</h1>
+            <p class="splash-subhead">
+                Full featured shell in the cloud
+            </p>
+            <p>
+                <a href="#demo" class="pure-button pure-button-primary">Try demo</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="content">
+            <h2 class="content-head is-center"></h2>
+
+            <div class="pure-g">
+                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+
+                    <h3 class="content-subhead">
+                        <i class="fa fa-rocket"></i>
+                        Get Started Quickly
+                    </h3>
+                    <p>
+                        Once you install command line interface, you are ready to go!
+                        <pre>$ npm -g install resh</pre>
+                        <pre>$ resh echo Hello world!</pre>
+                    </p>
+                </div>
+                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                    <h3 class="content-subhead">
+                        <i class="fa fa-terminal"></i>
+                        Shell without limits
+                    </h3>
+                    <p>
+                        All your commands are run on real shell. Everything is allowed and supported.
+                    </p>
+                </div>
+                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                    <h3 class="content-subhead">
+                        <i class="fa fa-th-large"></i>
+                        Cross platorm
+                    </h3>
+                    <p>
+                        Run your favorite commands on windows box.
+                    </p>
+                </div>
+                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                    <h3 class="content-subhead">
+                        <i class="fa fa-bolt"></i>
+                        Rest API
+                    </h3>
+                    <p>
+                        Run your shell commands directly from your web app. Checkout our <a href="http://api.resh.io">API</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ribbon l-box-lrg pure-g">
+            <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
+                <img class="pure-img-responsive" alt="File Icons" width="300" src="/images/logo-300.png">
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
+
+                <h2 class="content-head content-head-ribbon">RESH - REmote SHell in the cloud</h2>
+
+                <p>
+                    Think of an unlimited collection of command line tools. Resh give you access to your favorite command line tools from anywhere.  You can access powerful linux tools from MS Windows. No more teadious instalation process. 
+                </p>
+            </div>
+        </div>
+
+        <div class="content" id="signup">
+            <h2 class="content-head is-center">We have remote shell for everybody.</h2>
+
+            <div class="pure-g">
+                <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+                    <!-- Begin MailChimp Signup Form -->
+                    <form class="pure-form pure-form-stacked" action="//sasak.us3.list-manage.com/subscribe/post?u=00962d3012d4c35b5000f82a9&amp;id=8e883e34b4" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                        <h2>Early access</h2>
+                        <div class="mc-field-group">
+                            <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+                            </label>
+                            <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+                        </div>
+                        <div class="mc-field-group">
+                            <label for="mce-FNAME">First Name </label>
+                            <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+                        </div>
+                        <div class="mc-field-group">
+                            <label for="mce-LNAME">Last Name </label>
+                            <input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+                        </div>
+                        <div id="mce-responses" class="clear">
+                            <div class="response" id="mce-error-response" style="display:none"></div>
+                            <div class="response" id="mce-success-response" style="display:none"></div>
+                        </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                        <div style="position: absolute; left: -5000px;"><input type="text" name="b_00962d3012d4c35b5000f82a9_8e883e34b4" tabindex="-1" value=""></div>
+                        <div class="clear"><button type="submit" class="pure-button">Subscribe</button></div>
+                    </form>
+                    <!--End mc_embed_signup-->
+                </div>
+
+                <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
+                    <h4>Contact Us</h4>
+                    <p>
+                        Do you have special needs? Tell us what you dream about and we find the solution for you. <br>
+                        <a href="mailTo:todo">resh@resh.io</a>
+                    </p>
+
+                    <h4>Missing your software?</h4>
+                    <p>
+                        Let us know what command tools do you use. We are more than happy to added to our collection.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ribbon l-box-lrg pure-g" id="demo">
+            <div class="l-box-lrg pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
+
+                <div id="terminal"></div>   
+                <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script type="text/javascript" src="bower_components/jquery.terminal/js/jquery.terminal-min.js"></script>
+                <script type="text/javascript" src="scripts/terminal.js"></script>
+                <link rel="stylesheet" href="bower_components/jquery.terminal/css/jquery.terminal.css"/>
+
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
+
+                <h2 class="content-head content-head-ribbon">Live demo</h2>
+
+                <p>
+                    Give it a try and type whatever you like. Remember that each command is executed separately and have no effects on other commands.
+                </p>
+                <h3 class="content-head content-head-ribbon">Examples</h3>
+                <pre>$ echo Hello World!</pre>
+                <pre>$ uname -a</pre>
+                <pre>$ touch test; ls -la</pre>
+                <pre>$ echo -e "row1\nrow2\data22">input.txt;cat i*|grep 2</pre>
+            </div>
+        </div>
+
+        <div class="footer l-box is-center">
+            Made with ♥ in Norway.
+        </div>
+    </div>
 </body>
 </html>

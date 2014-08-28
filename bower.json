@@ -1,0 +1,20 @@
+{
+  "name": "resh-webterminal",
+  "version": "0.0.0",
+  "homepage": "https://github.com/RobertSasak/resh-webterminal",
+  "authors": [
+    "Robert Sasak <robert.sasak@gmail.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery.terminal": "~0.8.8"
+  }
+}
