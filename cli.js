@@ -8,7 +8,7 @@ var stdin = require('get-stdin');
 var sudoBlock = require('sudo-block');
 var notifier = updateNotifier();
 var path = require('path');
-var Oblacik = require('./oblacik.js');
+var Resh = require('./resh.js');
 var fs = require('fs');
 var Configstore = require('configstore');
 var packageName = require('./package').name;
@@ -59,27 +59,21 @@ function parseArgs(args) {
 function showHelp() {
 	console.log(multiline.stripIndent(function () {
 		/*
-		Execute shell commands remotely.
+		Execute shell commands in cloud.
 
-		If command specify files thore are first uploaded and then the command is executed.
+		If command specify files those are first uploaded and then the command is executed.
 
 		Usage
-		  oblacik <shell command>
-		  oblacik [ <shell command>  ] [ <url> <resolution> ]
-		  oblacik [ <shell command> ] < <file>
-		  cat <file> | oblacik [ <shell command> ... ]
+		  resh <shell command>
+		  cat <file> | resh [ <shell command> ... ]
 
 		Example
-		  oblacik echo Hello World
-		  oblacik < batch.txt
-		  cat batch.txt | oblacik
+		  resh echo Hello World
+		  resh < batch.txt
+		  cat batch.txt | resh
 
 		Options
-		  -k, --key <userKey>    Authentification key.
-		  -d, --debug            Output what happens under hood.
 		  -v, --version
-
-		Once the key is provided the key is cached and can be omit in next commands.	
 	*/
 	}));
 }
@@ -116,7 +110,7 @@ function sendCommand(userKey, server, args) {
 
 	var files = detectFiles(args);
 
-	var commands = new Oblacik.Commands(server);
+	var commands = new Resh.Commands(server);
 	commands.create(command, files, {}, process.stdout, function () {
 
 		commands.files(function (files) {
@@ -149,10 +143,10 @@ function init(args, options) {
 
 	// options.key = options.key || conf.get('key');
 	// if (!options.key) {
-	// 	return console.log('Missing key. Try command $ oblacik -k 123...xyz echo Hello World');
+	// 	return console.log('Missing key. Try command $ resh -k 123...xyz echo Hello World');
 	// }
 
-	options.server = options.server || conf.get('server') || 'http://oblacik.sasak.sk';
+	options.server = options.server || conf.get('server') || 'http://api.resh.io';
 
 	conf.set('key', options.key);
 	conf.set('server', options.server);

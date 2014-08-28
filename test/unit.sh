@@ -10,7 +10,7 @@ function assert {
         printf "\nFAIL: $this\n'$1' != '$2'\n"; exit 1
 }
 
-try "Oblacik"
+try "Resh"
 
 assert "`node ./cli.js echo abc`" "abc"
 assert "`node ./cli.js 'cat test/file.txt | grep empty'`" "Not empty file"

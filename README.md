@@ -1,2 +1,2 @@
-oblacik-cli
-===========
+resh-cli
+========

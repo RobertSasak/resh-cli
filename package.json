@@ -1,27 +1,34 @@
 {
-  "name": "oblacik-cli",
-  "version": "0.0.1",
-  "description": "Shell in the cloud.",
+  "name": "resh-cli",
+  "version": "1.0.3",
+  "description": "Remote shell in the cloud.",
   "license": "MIT",
-  "repository": "robert.sasak/oblacik-cli",
+  "repository": "robert.sasak/resh-cli",
   "bin": {
-    "oblacik": "cli.js"
+    "resh": "cli.js"
   },
   "author": {
     "name": "Robert Sasak",
     "email": "robert.sasak@gmail.com",
-    "url": "http://robert.sasak.sk"
+    "url": "http://resh.io"
   },
   "engines": {
     "node": ">=0.10.0"
   },
   "files": [
     "cli.js",
-    "oblacik.js"
+    "resh.js"
   ],
   "keywords": [
-    "cli",
-    "bin"
+    "shell",
+    "terminal",
+    "remote",
+    "cloud",
+    "command",
+    "resh",
+    "cmd",
+    "line",
+    "execute"
   ],
   "dependencies": {
     "configstore": "~0.3.1",
