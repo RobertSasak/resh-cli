@@ -1,6 +1,6 @@
 {
-  "name": "resh-cli",
-  "version": "1.0.3",
+  "name": "resh",
+  "version": "1.0.4",
   "description": "Remote shell in the cloud.",
   "license": "MIT",
   "repository": "robert.sasak/resh-cli",
@@ -17,7 +17,8 @@
   },
   "files": [
     "cli.js",
-    "resh.js"
+    "resh.js",
+    "utils.js"
   ],
   "keywords": [
     "shell",

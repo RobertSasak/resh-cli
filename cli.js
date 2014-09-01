@@ -146,7 +146,7 @@ function init(args, options) {
 	// 	return console.log('Missing key. Try command $ resh -k 123...xyz echo Hello World');
 	// }
 
-	options.server = options.server || conf.get('server') || 'http://api.resh.io';
+	options.server = options.server || 'http://api.resh.io';
 
 	conf.set('key', options.key);
 	conf.set('server', options.server);
